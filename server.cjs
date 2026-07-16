@@ -51,12 +51,12 @@ async function startServer() {
       });
       const prompt = `Extract transaction details from the following raw text extracted from a bank statement.
       For each transaction, provide:
-      - date (YYYY-MM-DD format)
-      - desc (Description or Particulars)
+      - date (YYYY-MM-DDTHH:mm:ss format if exact time is present in statement, otherwise just YYYY-MM-DD)
+      - desc (Pull the Merchant name or a shorter, more relatable description from the raw description. e.g. from "UPI/455232248371/Payment for 668/maprogardenoffl/Yes Bank Ltd" extract "Maprogarden")
       - amount (Absolute numerical amount)
       - type ("Income" or "Expense")
       - account (The bank name, if inferrable, else empty string. Do NOT use account numbers.)
-      - note (Any extra details like UPI reference, otherwise empty string)
+      - note (Any extra details like UPI reference or the original raw description, otherwise empty string)
       - category (Assign the most appropriate category from the following list based on the transaction description. If none match well, assign "Uncategorized").
       
       List of existing categories:
