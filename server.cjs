@@ -57,7 +57,7 @@ async function startServer() {
       - type ("Income" or "Expense")
       - account (The bank name, if inferrable, else empty string. Do NOT use account numbers.)
       - note (Any extra details like UPI reference or the original raw description, otherwise empty string)
-      - category (Assign the most appropriate category from the following list based on the transaction description. If none match well, assign "Uncategorized").
+      - category (Assign the most appropriate category from the following list based on the transaction description. If none match well, suggest a new short category name like "Food", "Transport", "Shopping", etc.).
       
       List of existing categories:
       ${categoriesList.join(", ")}
