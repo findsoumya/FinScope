@@ -36,11 +36,12 @@ async function startServer() {
   });
   app.post("/api/parse-text", async (req, res) => {
     try {
-      const { text, categories } = req.body;
+      const { text, categories, mappings } = req.body;
       if (!text) {
         return res.status(400).json({ error: "No text provided" });
       }
       const categoriesList = JSON.parse(categories || "[]");
+      const mappingsList = JSON.parse(mappings || "[]");
       const ai = new import_genai.GoogleGenAI({
         apiKey: req.headers["x-gemini-api-key"] || process.env.GEMINI_API_KEY,
         httpOptions: {
@@ -61,6 +62,9 @@ async function startServer() {
       
       List of existing categories:
       ${categoriesList.join(", ")}
+      
+      Here are examples of past transactions and their categories to help you categorize accurately:
+      ${mappingsList.slice(0, 200).join("\n      ")}
       
       Text to parse:
       ${text.substring(0, 2e5)} // Support larger bank statements
